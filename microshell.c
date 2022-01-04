@@ -40,6 +40,7 @@ void	cd_error(char *msg, char *arg)
 	if (arg != NULL)
 		write(2, arg, len(arg));
 	write(2, "\n", 1);
+	ret = 1;
 }
 
 char	**get_next(char **argv, char *sep)
@@ -88,15 +89,11 @@ void	cd_builtin(char **argv)
 {
 	if (!argv || *(argv + 1))
 	{
-		ret = 1;
 		cd_error("bad arguments", NULL);
 		return ;
 	}
 	if (chdir(*argv) == -1)
-	{
-		ret = 1;
 		cd_error("cannot change directory to ", *argv);
-	}
 }
 
 void	exe_cmd(char **argv)
